@@ -57,6 +57,7 @@ architecture rtl of mpu is
     Port (
         data_in   : in  STD_LOGIC_VECTOR(15 downto 0);
         ir_ld        : in  STD_LOGIC;
+        clk : in std_logic;
         data_out  : out STD_LOGIC_VECTOR(11 downto 0);
         opcode  : out STD_LOGIC_VECTOR(3 downto 0)
     );
@@ -67,8 +68,7 @@ architecture rtl of mpu is
         reset   : in  STD_LOGIC;                      -- Réinitialisation
         RnW     : in  STD_LOGIC;                      -- Lecture/Écriture
         addr    : in  STD_LOGIC_VECTOR(11 downto 0);  -- Bus d'adresses (12 bits)
-        data_in : in  STD_LOGIC_VECTOR(15 downto 0);  -- Données d'entrée (16 bits)
-        data_out: out STD_LOGIC_VECTOR(15 downto 0)   -- Données de sortie (16 bits)
+        data : inout  STD_LOGIC_VECTOR(15 downto 0)  -- Données d'entrée (16 bits)
     );
     end component;
     component oe is
@@ -84,6 +84,7 @@ architecture rtl of mpu is
         data_in   : in  STD_LOGIC_VECTOR(15 downto 0);
         pc_ld        : in  STD_LOGIC;
         clk : in std_logic;
+        reset : in std_logic;
         data_out  : out STD_LOGIC_VECTOR(11 downto 0)
     );
     end component;
@@ -99,7 +100,6 @@ architecture rtl of mpu is
     signal selA, selB, RnW, pc_ld, ir_ld, acc_ld, acc_oe, accZ, acc15 : std_logic;
     signal opcode, alufs : std_logic_vector(3 downto 0);
     signal alu_in1, alu_in2, alu_out: std_logic_vector(15 downto 0);
-    signal oe_enable_signal : std_logic;
     signal ir_out, pc_out : std_logic_vector(11 downto 0);
     signal memBus : std_logic_vector(15 downto 0);
     signal addressBus : std_logic_vector(11 downto 0);
@@ -128,8 +128,7 @@ mem_block_inst: mem_block
     reset => reset,
     RnW => RnW,
     addr => addressBus,
-    data_in => memBus,
-    data_out => memBus
+    data => memBus
 );
 
 memValMux_inst: memValMux
@@ -161,21 +160,23 @@ alu_inst: alu
 oe_inst: oe
  port map(
     data_in => alu_in1,
-    en => oe_enable_signal,
+    en => acc_oe,
     data_out => memBus
 );
 ir_inst: ir
  port map(
     data_in => memBus,
     ir_ld => ir_ld,
+    clk => clk,
     data_out => ir_out,
     opcode => opcode
 );
 
 pc_inst: pc
  port map(
-    clk => clk,
     data_in => alu_out,
+    clk => clk,
+    reset => reset,
     pc_ld => pc_ld,
     data_out => pc_out
 );

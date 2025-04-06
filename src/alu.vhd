@@ -21,9 +21,9 @@ begin
     begin
         case alufs is
             when X"0" => S <= B;
-            when X"1" => S <= std_logic_vector(unsigned(A) - unsigned(B));
+            when X"1" => S <= std_logic_vector(unsigned(B) + 1);
             when X"2" => S <= std_logic_vector(unsigned(A) + unsigned(B));
-            when X"3" => S <= std_logic_vector(unsigned(B) + 1);
+            when X"3" => S <= std_logic_vector(unsigned(A) - unsigned(B));
             when others => S <= ( others => '0' );
         end case;
     end process;

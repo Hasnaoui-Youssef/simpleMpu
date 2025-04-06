@@ -17,6 +17,8 @@ begin
     begin
         if en = '1' then
             data_out <= data_in;
+        else
+            data_out <= (others => 'Z');
         end if;
     end process;
 

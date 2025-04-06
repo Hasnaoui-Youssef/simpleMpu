@@ -1,37 +1,37 @@
 v 4
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "testbench/mpu_tb.vhd" "dc7219fa22d5fd18dd9d5b583897fcf3aa91a282" "20250406170257.891":
+file "/home/youssef/projects/simpleMpu/" "testbench/mpu_tb.vhd" "86897423c60006c2bffc75cfb5917def9409b60b" "20250406222113.407":
   entity mpu_tb at 1( 0) + 0 on 33;
   architecture testbench of mpu_tb at 8( 107) + 0 on 34;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/2bitmux.vhd" "e6e01cdc35500af7505031e1ee6c56b13b689858" "20250406170257.882":
+file "/home/youssef/projects/simpleMpu/" "src/2bitmux.vhd" "e6e01cdc35500af7505031e1ee6c56b13b689858" "20250406222113.399":
   entity memvalmux at 1( 0) + 0 on 11;
   architecture behavioralmux of memvalmux at 16( 328) + 0 on 12;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/acc.vhd" "5691cd7632a6d55f295265252a5457ebc703b895" "20250406170257.882":
+file "/home/youssef/projects/simpleMpu/" "src/acc.vhd" "5691cd7632a6d55f295265252a5457ebc703b895" "20250406222113.400":
   entity acc at 1( 0) + 0 on 13;
   architecture accb of acc at 18( 346) + 0 on 14;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/alu.vhd" "74b7b8a444351bef5e52849bd8d9f01bd0da73e4" "20250406170257.883":
+file "/home/youssef/projects/simpleMpu/" "src/alu.vhd" "faf2a2954078b03425e0a580c3e3b1d9a93095c4" "20250406222113.400":
   entity alu at 1( 0) + 0 on 15;
   architecture rtl of alu at 16( 308) + 0 on 16;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/clk.vhd" "d9ea2932c49d752ad69acbb66bbef017652a590d" "20250406170257.883":
+file "/home/youssef/projects/simpleMpu/" "src/clk.vhd" "d9ea2932c49d752ad69acbb66bbef017652a590d" "20250406222113.400":
   entity clk at 1( 0) + 0 on 17;
   architecture rtl of clk at 14( 227) + 0 on 18;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/ir.vhd" "4a7b1db8a91ecfa7ce73ba8ddf92b3c12bc438fa" "20250406170257.883":
+file "/home/youssef/projects/simpleMpu/" "src/ir.vhd" "63c9b1efbe8746cac6f60f3c4cb1ee5e1ef11bc5" "20250406222113.401":
   entity ir at 1( 0) + 0 on 19;
-  architecture behavioral_ir of ir at 20( 315) + 0 on 20;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/memory_block.vhd" "6620e90f838baf80a53c806e14d74b57667d2c6d" "20250406170257.884":
+  architecture behavioral_ir of ir at 21( 343) + 0 on 20;
+file "/home/youssef/projects/simpleMpu/" "src/memory_block.vhd" "14deff4276b7a6806b71b2e8d529a58ab84e305d" "20250406222113.401":
   entity mem_block at 1( 0) + 0 on 21;
-  architecture behavioral_mem of mem_block at 22( 599) + 0 on 22;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/mpu.vhd" "df512f7af6c225aa42dcc78af65e3d832a8bde40" "20250406170257.884":
+  architecture behavioral_mem of mem_block at 21( 512) + 0 on 22;
+file "/home/youssef/projects/simpleMpu/" "src/mpu.vhd" "51cd02b84cbc07a0e1e6af4fc00d1b4093e3aa03" "20250406222113.401":
   entity mpu at 1( 0) + 0 on 23;
   architecture rtl of mpu at 11( 149) + 0 on 24;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/oe.vhd" "3c4c8fbd45141394c3407f4a9a84a854761d7516" "20250406170257.884":
+file "/home/youssef/projects/simpleMpu/" "src/oe.vhd" "560ebe6968e00b7ce19f1ca16087d1934fa3b07c" "20250406222113.402":
   entity oe at 1( 0) + 0 on 25;
   architecture rtl of oe at 12( 223) + 0 on 26;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/pc.vhd" "d86436550e60adaa53d6ede2ffae7b90ab1a0b8c" "20250406170257.884":
+file "/home/youssef/projects/simpleMpu/" "src/pc.vhd" "112b16d9581979923e5961898a1d009d72693f9e" "20250406222113.402":
   entity pc at 1( 0) + 0 on 27;
-  architecture behavioral_pc of pc at 20( 291) + 0 on 28;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/pcIrMux.vhd" "274dd82aed0cd09cdbabea57643c5224dfb7b82f" "20250406170257.885":
+  architecture behavioral_pc of pc at 21( 321) + 0 on 28;
+file "/home/youssef/projects/simpleMpu/" "src/pcIrMux.vhd" "274dd82aed0cd09cdbabea57643c5224dfb7b82f" "20250406222113.402":
   entity pcirmux at 1( 0) + 0 on 29;
   architecture behavioralmux of pcirmux at 13( 272) + 0 on 30;
-file "/home/youssef/projects/vhdl_projects/micro_proc/" "src/sequencer.vhd" "c623866bcca5d0f4164de180a829c94fc3aa92f8" "20250406170257.885":
+file "/home/youssef/projects/simpleMpu/" "src/sequencer.vhd" "1b5e6aadd93d561f0e631ab2be2aceb465ef1e1a" "20250406222113.402":
   entity sequencer at 1( 0) + 0 on 31;
   architecture structural_seq of sequencer at 31( 558) + 0 on 32;

@@ -13,7 +13,7 @@ architecture testbench of mpu_tb is
     );
     end component;
     signal clk : std_logic := '0';
-    signal reset : std_logic := '0';
+    signal reset : std_logic := '1';
 
     constant clk_period : time := 10 ns;
 begin
@@ -36,7 +36,7 @@ mpu_inst: mpu
 
 sim_proc : process
 begin
-    wait for clk_period;
+    wait for 30 ns;
     reset <= '0';
     wait for 1000 ns;
     assert false report "Simulation" severity failure;
