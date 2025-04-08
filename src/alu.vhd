@@ -8,6 +8,7 @@ entity alu is
     port (
         A : in std_logic_vector(15 downto 0);
         B : in std_logic_vector(15 downto 0);
+        clk : in std_logic;
         alufs : in std_logic_vector(3 downto 0);
         S : out std_logic_vector(15 downto 0)
     );
@@ -16,15 +17,9 @@ end entity alu;
 architecture rtl of alu is
 
 begin
-
-    process (A, B, alufs)
-    begin
-        case alufs is
-            when X"0" => S <= B;
-            when X"1" => S <= std_logic_vector(unsigned(B) + 1);
-            when X"2" => S <= std_logic_vector(unsigned(A) + unsigned(B));
-            when X"3" => S <= std_logic_vector(unsigned(A) - unsigned(B));
-            when others => S <= ( others => '0' );
-        end case;
-    end process;
+    S <= B when alufs = "0000" else
+    std_logic_vector(unsigned(B) + 1) when alufs = "0001" else
+    std_logic_vector(unsigned(A) + unsigned(B)) when alufs = "0010" else
+    std_logic_vector(unsigned(A) - unsigned(B)) when alufs = "0011" else
+    (others => '0');
 end architecture rtl;

@@ -20,6 +20,7 @@ architecture rtl of mpu is
         selA   : out std_logic;
         selB   : out std_logic;
         RnW   : out std_logic;
+        pc_inc : out std_logic;
         pc_ld  : out std_logic;
         ir_ld  : out std_logic;
         acc_ld : out std_logic;
@@ -49,6 +50,7 @@ architecture rtl of mpu is
     port (
         A : in std_logic_vector(15 downto 0);
         B : in std_logic_vector(15 downto 0);
+        clk : in std_logic;
         alufs : in std_logic_vector(3 downto 0);
         S : out std_logic_vector(15 downto 0)
     );
@@ -64,17 +66,18 @@ architecture rtl of mpu is
     end component;
     component mem_block is
     Port (
-        clk     : in  STD_LOGIC;                      -- Horloge
         reset   : in  STD_LOGIC;                      -- Réinitialisation
         RnW     : in  STD_LOGIC;                      -- Lecture/Écriture
+        clk : in std_logic;
         addr    : in  STD_LOGIC_VECTOR(11 downto 0);  -- Bus d'adresses (12 bits)
-        data : inout  STD_LOGIC_VECTOR(15 downto 0)  -- Données d'entrée (16 bits)
+        data : inout std_logic_vector(15 downto 0)
     );
     end component;
     component oe is
     port (
         data_in : in std_logic_vector(15 downto 0);
         en : in std_logic;
+        clk : in std_logic;
         data_out : out std_logic_vector(15 downto 0)
     );
     end component;
@@ -83,6 +86,7 @@ architecture rtl of mpu is
     Port (
         data_in   : in  STD_LOGIC_VECTOR(15 downto 0);
         pc_ld        : in  STD_LOGIC;
+        pc_inc : in std_logic;
         clk : in std_logic;
         reset : in std_logic;
         data_out  : out STD_LOGIC_VECTOR(11 downto 0)
@@ -97,7 +101,7 @@ architecture rtl of mpu is
     );
     end component;
 
-    signal selA, selB, RnW, pc_ld, ir_ld, acc_ld, acc_oe, accZ, acc15 : std_logic;
+    signal selA, selB, RnW, pc_ld,pc_inc, ir_ld, acc_ld, acc_oe, accZ, acc15 : std_logic;
     signal opcode, alufs : std_logic_vector(3 downto 0);
     signal alu_in1, alu_in2, alu_out: std_logic_vector(15 downto 0);
     signal ir_out, pc_out : std_logic_vector(11 downto 0);
@@ -115,6 +119,7 @@ sequencer_inst: sequencer
     selA => selA,
     selB => selB,
     RnW => RnW,
+    pc_inc => pc_inc,
     pc_ld => pc_ld,
     ir_ld => ir_ld,
     acc_ld => acc_ld,
@@ -122,11 +127,12 @@ sequencer_inst: sequencer
     alufs => alufs
 );
 
+
 mem_block_inst: mem_block
  port map(
-    clk => clk,
     reset => reset,
     RnW => RnW,
+    clk => clk,
     addr => addressBus,
     data => memBus
 );
@@ -141,10 +147,10 @@ memValMux_inst: memValMux
 
 acc_inst: acc
  port map(
-    clk => clk,
     data_in => alu_out,
     acc_ld => acc_ld,
     data_out => alu_in1,
+    clk => clk,
     accZ => accZ,
     acc15 => acc15
 );
@@ -153,6 +159,7 @@ alu_inst: alu
  port map(
     A => alu_in1,
     B => alu_in2,
+    clk => clk,
     alufs => alufs,
     S => alu_out
 );
@@ -161,6 +168,7 @@ oe_inst: oe
  port map(
     data_in => alu_in1,
     en => acc_oe,
+    clk => clk,
     data_out => memBus
 );
 ir_inst: ir
@@ -175,9 +183,10 @@ ir_inst: ir
 pc_inst: pc
  port map(
     data_in => alu_out,
-    clk => clk,
     reset => reset,
+    clk => clk,
     pc_ld => pc_ld,
+    pc_inc => pc_inc,
     data_out => pc_out
 );
 

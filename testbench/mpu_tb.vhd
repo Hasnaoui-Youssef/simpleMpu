@@ -22,9 +22,9 @@ clk_process : process
 begin
     while true loop
         clk <= '0';
-        wait for clk_period / 2;
+        wait for clk_period;
         clk <= '1';
-        wait for clk_period / 2;
+        wait for clk_period;
     end loop;
 end process;
 
@@ -36,9 +36,9 @@ mpu_inst: mpu
 
 sim_proc : process
 begin
-    wait for 30 ns;
+    wait for 25 ns;
     reset <= '0';
-    wait for 1000 ns;
+    wait for 10000 ns;
     assert false report "Simulation" severity failure;
 end process;
 

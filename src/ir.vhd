@@ -9,8 +9,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity ir is
     Port (
         data_in   : in  STD_LOGIC_VECTOR(15 downto 0);
-        clk : in std_logic;
         ir_ld        : in  STD_LOGIC;
+        clk : in std_logic;
         data_out  : out STD_LOGIC_VECTOR(11 downto 0);
         opcode  : out STD_LOGIC_VECTOR(3 downto 0)
     );
@@ -24,7 +24,7 @@ architecture Behavioral_IR of ir is
 
 begin
 
-process(clk, ir_ld, data_in)
+process(clk)
 
     begin
         if rising_edge(clk) then

@@ -19,7 +19,7 @@ architecture accB of acc is
     signal accumulator : std_logic_vector(15 downto 0);
 
 begin
-    process(clk, acc_ld, data_in)
+    process(clk)
     begin
         if rising_edge(clk) then
             if acc_ld = '1' then
