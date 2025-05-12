@@ -30,6 +30,6 @@ begin
 
     data_out <= accumulator;
     accZ <= '1' when accumulator = X"0000" else '0';
-    acc15 <= '1' when accumulator >= X"0000" else '0';
+    acc15 <= '1' when accumulator >= X"0000" else '0'; -- Optimisation
 
 end architecture accB;

@@ -103,7 +103,7 @@ begin
                         acc_ld <= '0';
                         acc_oe <= '0';
                         alufs <= "0000";
-                    when others =>
+                    when others => null;
                     end case;
             when execute =>
                 case opcode is
@@ -117,10 +117,11 @@ begin
                     when "0011" =>
                         alufs <= "0001";
                         acc_ld <= '1';
-                    when others =>
+                    when others => null;
                     end case;
-            when halt =>
-            when rst =>
+            when halt => null;
+            when rst => null;
+            when others => null;
         end case;
     end process;
 end structural_seq;

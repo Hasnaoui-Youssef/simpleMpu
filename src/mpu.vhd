@@ -10,7 +10,7 @@ end entity mpu;
 
 architecture rtl of mpu is
 
-    component sequencer is
+    component seqTwo is
     Port (
         clk    : in  std_logic;
         reset  : in  std_logic;
@@ -50,7 +50,6 @@ architecture rtl of mpu is
     port (
         A : in std_logic_vector(15 downto 0);
         B : in std_logic_vector(15 downto 0);
-        clk : in std_logic;
         alufs : in std_logic_vector(3 downto 0);
         S : out std_logic_vector(15 downto 0)
     );
@@ -109,7 +108,7 @@ architecture rtl of mpu is
     signal addressBus : std_logic_vector(11 downto 0);
 
 begin
-sequencer_inst: sequencer
+sequencer_inst: seqTwo
  port map(
     clk => clk,
     reset => reset,
@@ -159,7 +158,6 @@ alu_inst: alu
  port map(
     A => alu_in1,
     B => alu_in2,
-    clk => clk,
     alufs => alufs,
     S => alu_out
 );
